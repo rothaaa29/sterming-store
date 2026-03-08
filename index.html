@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Sterming Store</title>
+<link href="pic/0.png" rel="icon" type="image/png"/>
+<link href="Stylebio.css" rel="stylesheet"/>
+</head>
+<style>
+  
+
+      
+
+    :root {
+      /* Dark Mode (Default) */
+      --bg1: #0b1020;
+      --bg2: #111a33;
+      --card: #0f1730cc;
+      --text: #eaf0ff;
+      --muted: #a7b4d6;
+      --btn: #1d2b57;
+      --btnHover: #25366e;
+      --ring: #5b7cfa;
+      --border: #ffffff14;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    :root[data-theme="light"] {
+      /* Light Mode Customization */
+      --bg1: #f0f4ff;
+      --bg2: #d9e2ff;
+      --card: #ffffff99;
+      --text: #1a1f2e;
+      --muted: #5c6a8e;
+      --btn: #e2e8f0;
+      --btnHover: #cbd5e1;
+      --ring: #3b82f6;
+      --border: #0000001a;
+      --glass: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Update existing styles to use variables for consistency */
+    .tabBtn { background: var(--glass); }
+    .cta { background: var(--glass); }
+    .icon { background: var(--glass); }
+    .footerLinks a { background: var(--glass); }
+
+    /* Theme Toggle Button Style */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px; /* Moved to left so it doesn't hit the music button */
+      z-index: 1000;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--btn);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+
+
+    /* ✅ Animated background */
+
+    body{
+
+      
+
+      margin:0;
+
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+
+      color:var(--text);
+
+      min-height:100vh;
+
+      display:flex;
+
+      justify-content:center;
+
+      padding:24px 20px;
+
+      overflow-x:hidden;
+
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+
+      position:relative;
+
+    }
+
+    body::before{
+
+      content:"";
+
+      position:fixed;
+
+      inset:-40%;
+
+      z-index:-2;
+
+      background:
+
+        radial-gradient(700px 420px at 20% 20%, #ffffff6d, transparent 60%),
+
+        radial-gradient(650px 420px at 80% 25%, #42077c40, transparent 60%),
+
+        radial-gradient(600px 420px at 50% 85%, #0b227c33, transparent 60%);
+
+      filter: blur(2px);
+
+      animation: bgMove 14s ease-in-out infinite alternate;
+
+      transform: translate3d(0,0,0);
+
+    }
+
+    body::after{
+
+      content:"";
+
+      position:fixed;
+
+      inset:0;
+
+      z-index:-1;
+
+      pointer-events:none;
+
+      background:
+
+        radial-gradient(circle at 10% 20%, #ffffff08, transparent 40%),
+
+        radial-gradient(circle at 90% 30%, #ffffff06, transparent 45%),
+
+        radial-gradient(circle at 50% 90%, #ffffff05, transparent 50%);
+
+      mix-blend-mode: overlay;
+
+      animation: grainShift 9s ease-in-out infinite alternate;
+
+    }
+
+    @keyframes bgMove{
+
+      0%   { transform: translate(-3%, -2%) scale(1.02) rotate(0deg); }
+
+      50%  { transform: translate(3%, 2%)  scale(1.06) rotate(2deg); }
+
+      100% { transform: translate(-2%, 3%) scale(1.03) rotate(-1deg); }
+
+    }
+
+    @keyframes grainShift{
+
+      0%   { transform: translate(0,0); opacity:.55; }
+
+      50%  { transform: translate(-1.5%, 1%); opacity:.4; }
+
+      100% { transform: translate(1.2%, -1.2%); opacity:.5; }
+
+    }
+
+
+
+    /* Container */
+
+    .content{
+
+      width:min(680px, 100%);
+
+      background:var(--card);
+
+      border:1px solid var(--border);
+
+      border-radius:22px;
+
+      box-shadow:0 18px 60px #00000055;
+
+      backdrop-filter: blur(10px);
+
+      padding:20px;
+
+      animation: popIn .65s cubic-bezier(.2,.85,.2,1) both;
+
+    }
+
+    @keyframes popIn{
+
+      from{ opacity:0; transform:translateY(16px) scale(.985); }
+
+      to{ opacity:1; transform:translateY(0) scale(1); }
+
+    }
+
+
+
+    /* Reveal */
+
+    .reveal{
+
+      opacity:0;
+
+      transform:translateY(10px);
+
+      transition: opacity .6s cubic-bezier(.2,.85,.2,1), transform .6s cubic-bezier(.2,.85,.2,1);
+
+      will-change: opacity, transform;
+
+    }
+
+    .reveal.in{ opacity:1; transform:translateY(0); }
+
+
+
+    /* Click ripple */
+
+    .ripple{ position:relative; overflow:hidden; }
+
+    .ripple::after{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-1px;
+
+      background: radial-gradient(circle at var(--x,50%) var(--y,50%), #ffffff2a, transparent 46%);
+
+      opacity:0;
+
+      transition: opacity .45s cubic-bezier(.2,.85,.2,1);
+
+      pointer-events:none;
+
+    }
+
+    .ripple:active::after{ opacity:1; }
+
+
+
+    /* ✅ AUTO PLAY button effect (pulse + shine loop) */
+
+    .autoBtn{
+
+      position:relative;
+
+      will-change: transform, filter;
+
+      animation: btnPulse 2.8s ease-in-out infinite;
+
+    }
+
+    .autoBtn::before{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-2px;
+
+      border-radius:inherit;
+
+      background: radial-gradient(circle at 50% 50%, #5b7cfa22, transparent 55%);
+
+      opacity:.0;
+
+      animation: btnGlow 2.8s ease-in-out infinite;
+
+      pointer-events:none;
+
+    }
+
+    .autoBtn::after{
+
+      content:"";
+
+      position:absolute;
+
+      top:-40%;
+
+      left:-60%;
+
+      width:55%;
+
+      height:180%;
+
+      border-radius:inherit;
+
+      background: linear-gradient(90deg, transparent, #ffffff40, transparent);
+
+      transform: rotate(18deg);
+
+      opacity:0;
+
+      animation: btnShine 3.2s ease-in-out infinite;
+
+      pointer-events:none;
+
+    }
+
+    @keyframes btnPulse{
+
+      0%,100%{ transform: translateY(0) scale(1); filter:brightness(1); }
+      50%{ transform: translateY(-1px) scale(1.01); filter:brightness(1.04); }
+
+    }
+
+    @keyframes btnGlow{
+
+      0%,100%{ opacity:0; }
+      45%{ opacity:.55; }
+      55%{ opacity:.35; }
+
+    }
+
+    @keyframes btnShine{
+
+      0%{ transform: translateX(-140%) rotate(18deg); opacity:0; }
+      15%{ opacity:.7; }
+      45%{ opacity:.25; }
+      100%{ transform: translateX(260%) rotate(18deg); opacity:0; }
+
+    }
+.topHeader {
+    display: flex;
+    align-items: center;    
+    justify-content: flex-start; 
+    padding: 20px;    
+    text-align: left;     
+}
+.avatarWrap {
+    margin-right: 15px;   
+    flex-shrink: 0;        
+}
+.avatarWrap img {
+    width: 70px;           
+    height: 70px;
+    border-radius: 50%;    
+    object-fit: cover;
+    border: 2px solid #3498db; 
+}
+.headText h1 {
+    margin: 0;              
+    font-size: 1.4rem;
+}
+.headText p {
+    margin: 5px 0 0 0;      
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+    .headText h1{ margin:0; font-size:20px; line-height:1.2; }
+    .headText p{ margin:6px 0 0; color:var(--muted); font-size:13.5px; line-height:1.45; }
+    .topOrder{ margin: 12px 0 6px; display:flex; gap:10px; }
+    .orderBtn{
+
+      width:100%;
+
+      text-decoration:none;
+
+      color:var(--text);
+
+      font-weight:950;
+
+      letter-spacing:.2px;
+
+      padding:14px;
+
+      border-radius:16px;
+
+      border:1px solid #ffffff1f;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:12px;
+
+      background: linear-gradient(135deg, #25366e, #1d2b57 55%, #4a2bd6);
+
+      box-shadow: 0 14px 40px #00000055;
+
+      transition: transform .35s cubic-bezier(.2,.85,.2,1),
+
+                  box-shadow .35s cubic-bezier(.2,.85,.2,1),
+
+                  filter .35s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .orderBtn:hover{ transform: translateY(-3px) scale(1.01); filter: brightness(1.06); box-shadow:0 18px 55px #00000070; }
+
+    .orderBtn:active{ transform: translateY(-1px) scale(.995); }
+
+
+
+    .orderLeft{ display:flex; flex-direction:column; gap:2px; position:relative; z-index:1; }
+
+    .orderTitle{ font-size:14px; line-height:1.1; }
+
+    .orderSub{ font-size:12px; font-weight:650; color:#eaf0ffcc; }
+
+    .orderRight{ position:relative; z-index:1; display:flex; align-items:center; gap:10px; font-weight:950; }
+
+    .orderPill{
+
+      padding:6px 10px; border-radius:999px;
+
+      background:#ffffff18; border:1px solid #ffffff22;
+
+      font-size:12px; backdrop-filter: blur(8px); white-space:nowrap;
+
+    }
+
+    .orderArrow{ font-size:18px; opacity:.95; }
+
+
+
+    /* Tabs */
+
+    .tabs{ display:flex; gap:10px; margin: 12px 0 14px; }
+
+    .tabBtn{
+
+      flex:1; padding:12px; border-radius:14px;
+
+      border:1px solid var(--border);
+
+      background:#ffffff10; color:var(--text);
+
+      font-weight:900; cursor:pointer; outline:none;
+
+      transition: transform .35s cubic-bezier(.2,.85,.2,1),
+
+                  background .35s cubic-bezier(.2,.85,.2,1),
+
+                  border-color .35s cubic-bezier(.2,.85,.2,1),
+
+                  box-shadow .35s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .tabBtn:hover{ transform:translateY(-2px); background:#ffffff16; }
+
+    .tabBtn:focus{ box-shadow:0 0 0 4px #5b7cfa33; border-color:var(--ring); }
+
+    .tabBtn.active{ background:var(--btn); border-color:var(--ring); transform:translateY(-1px); }
+
+
+
+    /* Panels */
+
+    .panelWrap{ position:relative; }
+
+    .panel{
+
+      /* border:1px solid var(--border);
+
+      background:#ffffff08; */
+
+      border-radius:16px;
+
+      padding:10px;
+
+      opacity:0;
+
+      transform:translateY(10px);
+
+      pointer-events:none;
+
+      position:absolute;
+
+      inset:0;
+
+      transition: opacity .5s cubic-bezier(.2,.85,.2,1), transform .5s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .panel.is-active{
+
+      opacity:1;
+
+      transform:translateY(0);
+
+      pointer-events:auto;
+
+      position:relative;
+
+      inset:auto;
+
+    }
+
+
+
+    .panelTitle{ margin:0 0 10px; font-weight:900; font-size:13px; letter-spacing:.2px; }
+
+
+
+    /* Links buttons */
+
+    .links{ display:grid; gap:10px; margin-top:10px; }
+
+    a.btn{
+
+      text-decoration:none;
+
+      color:var(--text);
+
+      background:var(--btn);
+
+      border:1px solid var(--border);
+
+      padding:14px;
+
+      border-radius:14px;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      outline:none;
+
+      min-height:60px;
+
+      transition: transform .35s cubic-bezier(.2,.85,.2,1),
+
+                  background .35s cubic-bezier(.2,.85,.2,1),
+
+                  box-shadow .35s cubic-bezier(.2,.85,.2,1),
+
+                  border-color .35s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    a.btn:hover{ background:var(--btnHover); transform:translateY(-2px); }
+
+    a.btn:focus{ box-shadow:0 0 0 4px #5b7cfa33; border-color:var(--ring); }
+
+
+
+    .left{ display:flex; align-items:center; gap:12px; }
+
+    .icon{
+
+      width:38px; height:38px; border-radius:12px;
+
+      background:#ffffff12; display:grid; place-items:center; flex:0 0 auto;
+
+    }
+
+    .icon img{ width:20px; height:20px; object-fit:contain; display:block; }
+
+    .label{ font-weight:800; }
+
+    .sub{ display:block; margin-top:2px; color:var(--muted); font-size:12px; font-weight:500; }
+
+    .arrow{ opacity:.85; }
+
+
+
+    /* CTA */
+
+    .ctaRow{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+
+    .cta{
+
+      text-decoration:none;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      padding:12px;
+
+      border-radius:14px;
+
+      border:1px solid var(--border);
+
+      background:#ffffff10;
+
+      color:var(--text);
+
+      font-weight:900;
+
+      outline:none;
+
+      transition: transform .35s cubic-bezier(.2,.85,.2,1),
+
+                  background .35s cubic-bezier(.2,.85,.2,1),
+
+                  box-shadow .35s cubic-bezier(.2,.85,.2,1),
+
+                  border-color .35s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .cta:hover{ transform:translateY(-2px); background:#ffffff16; }
+
+    .cta:focus{ box-shadow:0 0 0 4px #5b7cfa33; border-color:var(--ring); }
+
+    .sectionTitle{ margin:1px 0 10px; font-weight:900; letter-spacing:.2px; font-size:12.5px; color:var(--muted); }
+
+    .galleryGrid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
+
+    .tile{
+
+      width:100%;
+
+      aspect-ratio: 4 / 4;
+
+      border-radius:15px;
+
+      overflow:hidden;
+
+      border:1px solid var(--border);
+
+      background:#00000020;
+
+      display:block;
+
+      outline:none;
+
+      transition: transform .35s cubic-bezier(.2,.85,.2,1), box-shadow .35s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .tile img{
+
+      width:100%;
+
+      height:100%;
+
+      object-fit:contain;
+
+      display:block;
+
+      transition: transform .7s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+    .tile:hover{ transform: translateY(-2px); box-shadow: 0 16px 40px #00000055; }
+
+    .tile:hover img{ transform:scale(1.03); }
+
+
+
+    /* ✅ Footer */
+
+    .footer{
+
+      margin-top:16px;
+
+      padding-top:14px;
+
+      border-top:1px solid var(--border);
+
+      text-align:center;
+
+    }
+
+
+
+    .footerText{
+
+      margin:0;
+
+      font-size:12.5px;
+
+      color:var(--muted);
+
+      line-height:1.5;
+
+    }
+
+
+
+    .footerLinks{
+
+      margin-top:8px;
+
+      display:flex;
+
+      justify-content:center;
+
+      gap:12px;
+
+      flex-wrap:wrap;
+
+    }
+
+
+
+    .footerLinks a{
+
+      color:var(--text);
+
+      text-decoration:none;
+
+      font-weight:800;
+
+      font-size:12.5px;
+
+      padding:8px 10px;
+
+      border-radius:999px;
+
+      border:1px solid var(--border);
+
+      background:#ffffff08;
+
+      transition: transform .25s cubic-bezier(.2,.85,.2,1),
+
+                  background .25s cubic-bezier(.2,.85,.2,1);
+
+    }
+
+
+
+    .footerLinks a:hover{
+
+      transform: translateY(-2px);
+
+      background:#ffffff12;
+
+    }
+
+
+    .music-btn {
+
+      background-color: #1d2b57;
+
+      color: white;
+
+      padding: 10px 20px;
+
+      border-radius: 50px;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-size: 16px;
+
+      transition: background-color 0.3s ease;
+
+    }
+
+
+
+    .music-btn:hover {
+
+      background-color: #25366e;
+
+    }
+
+
+
+    .music-btn:focus {
+
+      outline: none;
+
+    }
+
+
+
+    .audio-player {
+
+      width: 100%;
+
+      height: 50px;
+
+    }
+
+
+
+    /* Mobile Responsiveness */
+
+    @media (max-width: 768px) {
+
+      .music-overlay {
+
+        right: 10px;     
+
+        gap: 5px;        
+
+        padding: 5px;   
+      }
+
+
+
+      .music-btn {
+
+        font-size: 10px; /* Reduce font size for smaller screens */
+        padding: 8px 16px; /* Adjust button padding */
+
+      }
+    }
+
+
+
+    @media (max-width: 480px) {
+
+      .music-overlay {
+      
+        right: 10px;
+        gap: 5px;       
+        padding: 6px;  
+      }
+      .music-btn {
+
+        font-size: 12px; 
+        padding: 6px 12px; 
+      }
+
+    }
+    @media (prefers-reduced-motion: reduce){
+
+      body::before, body::after{ animation:none; }
+      .content{ animation:none; }
+      .reveal{ opacity:1; transform:none; transition:none; }
+      .autoBtn{ animation:none; }
+      .autoBtn::before, .autoBtn::after{ animation:none; }
+
+    }
+    @media (max-width:520px){
+
+  .topOrder{
+
+    margin: 12px 0 6px;
+    display:flex;
+    gap:10px;
+    flex-direction: column; /* Stack vertically */
+
+  }
+
+
+
+  .orderBtn{
+
+    width:100%;
+    padding:12px; 
+    font-size: 14px; 
+    min-height: 50px; 
+    border-radius: 12px; 
+  }
+
+    .galleryGrid{ grid-template-columns:repeat(2, 1fr); } /* 2 per row */
+    .tile{ aspect-ratio: 2 / 2; }                         /* square */
+
+    }
+
+
+
+        /* Light/Dark mode toggle button */
+
+    .toggle-btn {
+
+      position: fixed;
+
+      top: 20px;
+
+      right: 20px;
+
+      background: var(--btn);
+
+      color: white;
+
+      padding: 10px 15px;
+
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    }
+
+    </style>
+<body>
+<div class="content">
+<div class="music-overlay">
+<button class="theme-toggle" id="theme-toggle" title="Toggle Light/Dark Mode">
+    🌓
+</button>
+</div>
+<header class="topHeader reveal" data-delay="0">
+<div class="avatarWrap">
+<a class="avatarLink" href="https://t.me/banizer" rel="noopener" target="_blank">
+<img alt="Avatar" src="pic/4.jpg"/>
+</a>
+</div>
+<div class="headText">
+<h1>Sterming Store</h1>
+<p>Communication - Premium/Pro Account </p>
+</div>
+</header>
+<div class="topOrder reveal" data-delay="80">
+<!-- ✅ auto play animation added: autoBtn -->
+<a class="orderBtn ripple autoBtn"  rel="noopener" target="_blank">
+<span class="orderLeft">
+<span class="orderTitle">Instant Delivery - Best Prices - Trusted Service</span>
+</a>
+</div>
+<div aria-label="Sections" class="tabs reveal" data-delay="140" role="tablist">
+<!-- ✅ auto play animation added: autoBtn -->
+<button aria-selected="true" class="tabBtn ripple autoBtn active" data-target="infoPanel" type="button">📁 Platform</button>
+<button aria-selected="false" class="tabBtn ripple autoBtn" data-target="prodPanel" type="button">🌐 Products</button>
+</div>
+<div class="panelWrap">
+<section aria-hidden="false" class="panel" id="infoPanel">
+<h3 class="panelTitle reveal" data-delay="160">My Social Media</h3>
+<div class="links">
+<!-- ✅ auto play animation added: autoBtn -->
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.facebook.com/profile.php?id=61584989107542" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Facebook" src="https://image2url.com/r2/default/images/1771688542961-38cb1bc1-aad8-44f4-8298-e264b0688481.png"/>
+</span>
+<span>
+<span class="label">Facebook Page</span>
+<span class="sub">Follow us </span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.tiktok.com/@sterming_strore" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="TikTok" src="https://image2url.com/r2/default/images/1771698212594-bada31d1-8f9b-4210-8e48-236d31af8d46.png"/>
+</span>
+<span>
+<span class="label">TikTok Account</span>
+<span class="sub">Follow us</span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.instagram.com/sterming.store" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Instagram" src="https://image2url.com/r2/default/images/1771698328051-0c2a618e-0091-47f8-aabe-ff9b54e6155c.png"/>
+</span>
+<span>
+<span class="label">Instagram Page</span>
+<span class="sub">Follow us</span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/banizer" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
+</span>
+<span>
+<span class="label">Telegram Contact</span>
+<span class="sub">subscription my service </span>
+</span>
+</span>
+<span class="arrow">›</span>  
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/my_sterming" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
+</span>
+<span>
+<span class="label">Telegram Channel</span>
+<span class="sub">subscription my service </span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+</div>
+</section>
+<section aria-hidden="true" class="panel" id="prodPanel">
+<div class="sectionTitle reveal" data-delay="300">There are</div>
+<div aria-label="Gallery" class="galleryGrid">
+<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
+<img alt="Image 1" src="/pic/1.png"/>
+</a>
+<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
+<img alt="Image 2" src="/pic/2.png"/>
+</a>
+<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
+<img alt="Image 1" src="/pic/3.png"/>
+</a>
+</div>
+</section>
+</div>
+<footer class="footer reveal" data-delay="520">
+<p class="footerText">Thanks for your supporting our service </p>
+</footer>
+</div>
+<script>
+
+  const toggleBtn = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
+
+  // Check for saved preference
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  htmlElement.setAttribute('data-theme', savedTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    htmlElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
+  // Reveal Animation Logic (In case you didn't have it)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+     const tabBtns = document.querySelectorAll(".tabBtn");
+
+    const panels = document.querySelectorAll(".panel");
+
+
+
+    function showPanel(id) {
+
+      panels.forEach(panel => {
+
+        const active = panel.id === id;
+
+        panel.classList.toggle("is-active", active);
+
+        panel.setAttribute("aria-hidden", active ? "false" : "true");
+
+      });
+
+
+
+      tabBtns.forEach(btn => {
+
+        const active = btn.dataset.target === id;
+
+        btn.classList.toggle("active", active);
+
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+
+      });
+
+    }
+
+
+
+    // ripple XY
+
+    function setRippleXY(el, e){
+
+      const r = el.getBoundingClientRect();
+
+      const x = ((e.clientX - r.left) / r.width) * 100;
+
+      const y = ((e.clientY - r.top) / r.height) * 100;
+
+      el.style.setProperty("--x", x + "%");
+
+      el.style.setProperty("--y", y + "%");
+
+    }
+
+    document.querySelectorAll(".ripple").forEach(el=>{
+
+      el.addEventListener("pointerdown", (e)=> setRippleXY(el, e));
+
+    });
+
+
+
+    // reveal runner
+
+    const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function runReveal(scope=document){
+
+      if (prefersReduce) return;
+
+      const items = scope.querySelectorAll(".reveal");
+
+      items.forEach(el=>{
+
+        const delay = Number(el.dataset.delay || 0);
+
+        el.classList.remove("in");
+
+        el.style.transitionDelay = delay + "ms";
+
+        requestAnimationFrame(()=> el.classList.add("in"));
+
+      });
+
+    }
+
+
+
+    function switchTab(id){
+
+      showPanel(id);
+
+      runReveal(document.getElementById(id));
+
+    }
+
+
+
+    tabBtns.forEach(btn => btn.addEventListener("click", () => switchTab(btn.dataset.target)));
+
+
+
+    // default
+
+    switchTab("infoPanel");
+
+    runReveal(document);
+
+
+
+    function toggleMusic() {
+
+      var music = document.getElementById("musicPlayer");
+
+      var button = document.querySelector(".music-btn");
+
+
+
+      if (music.paused) {
+
+        music.play();
+
+        button.textContent = "🎶 Pause Music";
+
+      } else {
+
+        music.pause();
+
+        button.textContent = "🎶 Play Music";
+
+      }
+
+    }
+
+
+
+        function toggleTheme() {
+
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+
+      if (currentTheme === "dark") {
+
+        document.documentElement.setAttribute("data-theme", "light");
+
+      } else {
+
+        document.documentElement.setAttribute("data-theme", "dark");
+
+      }
+
+    }
+
+
+
+    // Toggle music play/pause
+
+    function toggleMusic() {
+
+      const music = document.getElementById("musicPlayer");
+
+      const button = document.querySelector(".music-btn");
+
+
+
+      if (music.paused) {
+
+        music.play();
+
+        button.textContent = "🎶 Pause Music";
+
+      } else {
+
+        music.pause();
+
+        button.textContent = "🎶 Play Music";
+
+      }
+
+    }
+
+
+
+  </script>
+</body>
+</html>
