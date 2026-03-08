@@ -4,77 +4,45 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Sterming Store</title>
-<link href="pic/0.png" rel="icon" type="image/png"/>
+<title>Shiryu Premium</title>
+<link href="https://image2url.com/r2/default/images/1771739349599-7e1770a6-71af-4b3e-8e0d-0cddd758d641.png" rel="icon" type="image/png"/>
 <link href="Stylebio.css" rel="stylesheet"/>
 </head>
 <style>
-  
 
       
 
-    :root {
-      /* Dark Mode (Default) */
-      --bg1: #0b1020;
-      --bg2: #111a33;
-      --card: #0f1730cc;
-      --text: #eaf0ff;
-      --muted: #a7b4d6;
-      --btn: #1d2b57;
-      --btnHover: #25366e;
-      --ring: #5b7cfa;
-      --border: #ffffff14;
-      --glass: rgba(255, 255, 255, 0.05);
+    :root{
+
+      --bg1:#0b1020;
+
+      --bg2:#111a33;
+
+      --card:#0f1730cc;
+
+      --text:#eaf0ff;
+
+      --muted:#a7b4d6;
+
+      --btn:#1d2b57;
+
+      --btnHover:#25366e;
+
+      --ring:#5b7cfa;
+
+      --border:#ffffff14;
+
     }
 
-    :root[data-theme="light"] {
-      /* Light Mode Customization */
-      --bg1: #f0f4ff;
-      --bg2: #d9e2ff;
-      --card: #ffffff99;
-      --text: #1a1f2e;
-      --muted: #5c6a8e;
-      --btn: #e2e8f0;
-      --btnHover: #cbd5e1;
-      --ring: #3b82f6;
-      --border: #0000001a;
-      --glass: rgba(0, 0, 0, 0.05);
-    }
 
-    /* Update existing styles to use variables for consistency */
-    .tabBtn { background: var(--glass); }
-    .cta { background: var(--glass); }
-    .icon { background: var(--glass); }
-    .footerLinks a { background: var(--glass); }
 
-    /* Theme Toggle Button Style */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px; /* Moved to left so it doesn't hit the music button */
-      z-index: 1000;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: var(--btn);
-      border: 1px solid var(--border);
-      color: var(--text);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-    }
+    *{ box-sizing:border-box; }
 
 
 
     /* ✅ Animated background */
 
     body{
-
-      
 
       margin:0;
 
@@ -311,6 +279,7 @@
     @keyframes btnPulse{
 
       0%,100%{ transform: translateY(0) scale(1); filter:brightness(1); }
+
       50%{ transform: translateY(-1px) scale(1.01); filter:brightness(1.04); }
 
     }
@@ -318,7 +287,9 @@
     @keyframes btnGlow{
 
       0%,100%{ opacity:0; }
+
       45%{ opacity:.55; }
+
       55%{ opacity:.35; }
 
     }
@@ -326,41 +297,119 @@
     @keyframes btnShine{
 
       0%{ transform: translateX(-140%) rotate(18deg); opacity:0; }
+
       15%{ opacity:.7; }
+
       45%{ opacity:.25; }
+
       100%{ transform: translateX(260%) rotate(18deg); opacity:0; }
 
     }
-.topHeader {
-    display: flex;
-    align-items: center;    
-    justify-content: flex-start; 
-    padding: 20px;    
-    text-align: left;     
-}
-.avatarWrap {
-    margin-right: 15px;   
-    flex-shrink: 0;        
-}
-.avatarWrap img {
-    width: 70px;           
-    height: 70px;
-    border-radius: 50%;    
-    object-fit: cover;
-    border: 2px solid #3498db; 
-}
-.headText h1 {
-    margin: 0;              
-    font-size: 1.4rem;
-}
-.headText p {
-    margin: 5px 0 0 0;      
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
+
+
+
+    /* Header */
+
+    .topHeader{
+
+      display:flex;
+
+      flex-direction:column;   /* ✅ text under logo */
+
+      align-items:center;
+
+      justify-content:center;
+
+      gap:12px;
+
+      margin-bottom:12px;
+
+      text-align:center;
+
+
+
+    }
+
+
+
+    .avatarWrap{
+
+      width:100px; height:100px;
+
+      border-radius:50px;
+
+      overflow:hidden;
+
+      background:#0b1020;
+
+
+
+      /* ✅ Border */
+
+      border:2px solid #ffffff2a;                 /* visible border */
+
+      outline:1px solid #0c64f2;                /* glow outline (optional) */
+
+      outline-offset:2px;
+
+
+
+      /* ✅ Shadow */
+
+      box-shadow:
+
+        0 0 15px #08003bd3,                    /* main shadow */
+
+        0 0 0 1px #00014146;                      /* soft inner edge */
+
+
+
+      position:relative;
+
+      transform: translateZ(0);
+
+    }
+
+
+
+    .avatarLink{ display:block; width:100%; height:100%; }
+
+
+
+    .avatarWrap img{
+
+      width:100%; height:100%; object-fit:cover; display:block;
+
+      transition: transform .55s cubic-bezier(.2,.85,.2,1);
+
+      will-change: transform;
+
+    }
+
+    .avatarWrap:hover img{ transform:scale(1.05); }
+
+
+
+    .headText{ text-align:center; }
+
+
+
     .headText h1{ margin:0; font-size:20px; line-height:1.2; }
+
     .headText p{ margin:6px 0 0; color:var(--muted); font-size:13.5px; line-height:1.45; }
+
+    
+
+
+
+    
+
+
+
+    /* Order button */
+
     .topOrder{ margin: 12px 0 6px; display:flex; gap:10px; }
+
     .orderBtn{
 
       width:100%;
@@ -613,6 +662,10 @@
 
     .cta:focus{ box-shadow:0 0 0 4px #5b7cfa33; border-color:var(--ring); }
 
+
+
+    /* Gallery */
+
     .sectionTitle{ margin:1px 0 10px; font-weight:900; letter-spacing:.2px; font-size:12.5px; color:var(--muted); }
 
     .galleryGrid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
@@ -739,6 +792,29 @@
 
     }
 
+   /* ✅ Music Player Overlay */
+
+    .music-overlay {
+
+      position: fixed;
+
+      /* bottom: 20px; */
+
+      right: 20px;
+
+      z-index: 999;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 1px;
+
+    }
+
+
 
     .music-btn {
 
@@ -794,11 +870,14 @@
 
       .music-overlay {
 
-        right: 10px;     
+        /* bottom: 15px;    Adjust position for mobile */
 
-        gap: 5px;        
+        right: 10px;     /* Adjust position for mobile */
 
-        padding: 5px;   
+        gap: 5px;        /* Slightly reduce the gap between button and player */
+
+        padding: 5px;    /* Reduce padding for mobile */
+
       }
 
 
@@ -806,9 +885,11 @@
       .music-btn {
 
         font-size: 10px; /* Reduce font size for smaller screens */
+
         padding: 8px 16px; /* Adjust button padding */
 
       }
+
     }
 
 
@@ -816,34 +897,61 @@
     @media (max-width: 480px) {
 
       .music-overlay {
-      
+
+        /* bottom: 10px;   Even more positioning adjustments for very small screens */
+
         right: 10px;
-        gap: 5px;       
-        padding: 6px;  
+
+        gap: 5px;       /* Further reduce the gap */
+
+        padding: 6px;   /* Less padding for very small screens */
+
       }
+
+
+
       .music-btn {
 
-        font-size: 12px; 
-        padding: 6px 12px; 
+        font-size: 12px; /* Even smaller font for smaller screens */
+
+        padding: 6px 12px; /* Smaller button size for mobile */
+
       }
 
     }
+
+    
+
+    /* Reduce motion */
+
     @media (prefers-reduced-motion: reduce){
 
       body::before, body::after{ animation:none; }
+
       .content{ animation:none; }
+
       .reveal{ opacity:1; transform:none; transition:none; }
+
       .autoBtn{ animation:none; }
+
       .autoBtn::before, .autoBtn::after{ animation:none; }
 
     }
+
+
+
+    /* Mobile */
+
     @media (max-width:520px){
 
   .topOrder{
 
     margin: 12px 0 6px;
+
     display:flex;
+
     gap:10px;
+
     flex-direction: column; /* Stack vertically */
 
   }
@@ -853,13 +961,19 @@
   .orderBtn{
 
     width:100%;
-    padding:12px; 
-    font-size: 14px; 
-    min-height: 50px; 
-    border-radius: 12px; 
+
+    padding:12px; /* Adjust padding */
+
+    font-size: 14px; /* Smaller text size */
+
+    min-height: 50px; /* Adjust height */
+
+    border-radius: 12px; /* Round edges more */
+
   }
 
     .galleryGrid{ grid-template-columns:repeat(2, 1fr); } /* 2 per row */
+
     .tile{ aspect-ratio: 2 / 2; }                         /* square */
 
     }
@@ -894,57 +1008,73 @@
 <body>
 <div class="content">
 <div class="music-overlay">
-<button class="theme-toggle" id="theme-toggle" title="Toggle Light/Dark Mode">
-    🌓
-</button>
+<button class="music-btn" onclick="toggleMusic()">🎶 Play Music</button>
+<audio id="musicPlayer" loop="">
+<source src="https://image2url.com/r2/default/audio/1771746601198-4dec9bc1-b92f-4b05-901c-d8eaa6927149.mp3" type="audio/mp3"/> <!-- Replace with your music file -->
+
+        Your browser does not support the audio element.
+
+      </audio>
 </div>
 <header class="topHeader reveal" data-delay="0">
 <div class="avatarWrap">
-<a class="avatarLink" href="https://t.me/banizer" rel="noopener" target="_blank">
-<img alt="Avatar" src="pic/4.jpg"/>
+<a class="avatarLink" href="https://t.me/shiryusleepy" rel="noopener" target="_blank">
+<img alt="Avatar" src="https://image2url.com/r2/default/images/1771688099818-d778613a-99c4-4867-83d0-ffabe9f32e29.jpg"/>
 </a>
 </div>
 <div class="headText">
-<h1>Sterming Store</h1>
-<p>Communication - Premium/Pro Account </p>
+<h1>Shiryu Premium</h1>
+<p>Software Premium • Top-up services • Fast support</p>
 </div>
 </header>
 <div class="topOrder reveal" data-delay="80">
-  <!-- ✅ auto play animation added: autoBtn -->
-  <a class="orderBtn ripple autoBtn" href="https://shiryuprm.com" rel="noopener" target="_blank">
-  <span class="orderLeft">
-  <span class="orderTitle">🛒 Order via Website</span>
-  <!-- <span class="orderSub">Fast checkout • Instant support</span> -->
-  </span>
-  <span class="orderRight">
-  <span class="orderPill">shiryuprm.com</span>
-  <span class="orderArrow">›</span>
-  </span>
-  </a>
-  </div>
-  <div aria-label="Sections" class="tabs reveal" data-delay="140" role="tablist">
 <!-- ✅ auto play animation added: autoBtn -->
-<button aria-selected="true" class="tabBtn ripple autoBtn active" data-target="infoPanel" type="button">📁 Platform</button>
-<button aria-selected="false" class="tabBtn ripple autoBtn" data-target="prodPanel" type="button">🌐 Products</button>
+<a class="orderBtn ripple autoBtn" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<span class="orderLeft">
+<span class="orderTitle">🛒 Order via Website</span>
+<!-- <span class="orderSub">Fast checkout • Instant support</span> -->
+</span>
+<span class="orderRight">
+<span class="orderPill">shiryuprm.com</span>
+<span class="orderArrow">›</span>
+</span>
+</a>
+</div>
+<div aria-label="Sections" class="tabs reveal" data-delay="140" role="tablist">
+<!-- ✅ auto play animation added: autoBtn -->
+<button aria-selected="true" class="tabBtn ripple autoBtn active" data-target="infoPanel" type="button">ℹ️ Information</button>
+<button aria-selected="false" class="tabBtn ripple autoBtn" data-target="prodPanel" type="button">🛍️ Production</button>
 </div>
 <div class="panelWrap">
 <section aria-hidden="false" class="panel" id="infoPanel">
-<h3 class="panelTitle reveal" data-delay="160">My Social Media</h3>
+<h3 class="panelTitle reveal" data-delay="160">Information</h3>
 <div class="links">
 <!-- ✅ auto play animation added: autoBtn -->
-<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.facebook.com/profile.php?id=61584989107542" rel="noopener" target="_blank">
+<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/shiryupremium" rel="noopener" target="_blank">
 <span class="left">
 <span class="icon">
-<img alt="Facebook" src="https://image2url.com/r2/default/images/1771688542961-38cb1bc1-aad8-44f4-8298-e264b0688481.png"/>
+<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
 </span>
 <span>
-<span class="label">Facebook Page</span>
-<span class="sub">Follow us </span>
+<span class="label">Channel</span>
+<span class="sub">Chat &amp; order now</span>
 </span>
 </span>
 <span class="arrow">›</span>
 </a>
-<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.tiktok.com/@sterming_strore" rel="noopener" target="_blank">
+<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/shiryusleepy" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
+</span>
+<span>
+<span class="label">Telegram Support</span>
+<span class="sub">Chat &amp; order now</span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.tiktok.com/@www.shiryuprm.com" rel="noopener" target="_blank">
 <span class="left">
 <span class="icon">
 <img alt="TikTok" src="https://image2url.com/r2/default/images/1771698212594-bada31d1-8f9b-4210-8e48-236d31af8d46.png"/>
@@ -956,7 +1086,19 @@
 </span>
 <span class="arrow">›</span>
 </a>
-<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.instagram.com/sterming.store" rel="noopener" target="_blank">
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.facebook.com/shiryupremium2" rel="noopener" target="_blank">
+<span class="left">
+<span class="icon">
+<img alt="Facebook" src="https://image2url.com/r2/default/images/1771688542961-38cb1bc1-aad8-44f4-8298-e264b0688481.png"/>
+</span>
+<span>
+<span class="label">Facebook Page</span>
+<span class="sub">Follow us</span>
+</span>
+</span>
+<span class="arrow">›</span>
+</a>
+<a class="btn ripple autoBtn reveal" data-delay="340" href="https://www.instagram.com/shiryupremium" rel="noopener" target="_blank">
 <span class="left">
 <span class="icon">
 <img alt="Instagram" src="https://image2url.com/r2/default/images/1771698328051-0c2a618e-0091-47f8-aabe-ff9b54e6155c.png"/>
@@ -968,26 +1110,26 @@
 </span>
 <span class="arrow">›</span>
 </a>
-<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/banizer" rel="noopener" target="_blank">
+<a class="btn ripple autoBtn reveal" data-delay="280" href="https://wa.link/dgex8e" rel="noopener" target="_blank">
 <span class="left">
 <span class="icon">
-<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
+<img alt="WhatsApp" src="https://image2url.com/r2/default/images/1771688494626-bd1b6483-6d78-4b3b-8958-7fb6dd2bf4fc.png"/>
 </span>
 <span>
-<span class="label">Telegram Contact</span>
-<span class="sub">subscription my service </span>
+<span class="label">WhatsApp</span>
+<span class="sub">Backup contact</span>
 </span>
 </span>
-<span class="arrow">›</span>  
+<span class="arrow">›</span>
 </a>
-<a class="btn ripple autoBtn reveal" data-delay="220" href="https://t.me/my_sterming" rel="noopener" target="_blank">
+<a class="btn ripple autoBtn reveal" data-delay="280" href="https://shiryupremium-refund-calculator.netlify.app/" rel="noopener" target="_blank">
 <span class="left">
 <span class="icon">
-<img alt="Telegram" src="https://image2url.com/r2/default/images/1771688380962-98758982-9ad9-427b-a9aa-9e6f44f12641.png"/>
+<img alt="Refund" src="https://image2url.com/r2/default/images/1771757886179-d7ff8441-f9e1-4fd3-8d1a-363239dcac4a.png"/>
 </span>
 <span>
-<span class="label">Telegram Channel</span>
-<span class="sub">subscription my service </span>
+<span class="label">Refund Calculator</span>
+<span class="sub">Check for refund</span>
 </span>
 </span>
 <span class="arrow">›</span>
@@ -995,49 +1137,73 @@
 </div>
 </section>
 <section aria-hidden="true" class="panel" id="prodPanel">
-<div class="sectionTitle reveal" data-delay="300">There are</div>
+<!-- <h3 class="panelTitle reveal" data-delay="160">Production</h3> -->
+<!-- <div class="ctaRow">
+
+          ✅ auto play animation added: autoBtn
+
+          <a class="cta ripple autoBtn reveal" data-delay="220" href="https://shiryuprm.com" target="_blank" rel="noopener">🛒 Order Now</a>
+
+          <a class="cta ripple autoBtn reveal" data-delay="260" href="https://t.me/shiryupremium" target="_blank" rel="noopener">🔥 Promotions</a>
+
+        </div> -->
+<div class="sectionTitle reveal" data-delay="300">Gallery</div>
 <div aria-label="Gallery" class="galleryGrid">
-<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
-<img alt="Image 1" src="/pic/1.png"/>
+<a class="tile reveal" data-delay="340" href="https://t.me/shiryusleepy" rel="noopener" target="_blank">
+<img alt="Image 1" src="https://image2url.com/r2/default/images/1771688682275-2b99fb4b-9f8e-4f85-87ef-8524d39421bc.png"/>
 </a>
-<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
-<img alt="Image 2" src="/pic/2.png"/>
+<a class="tile reveal" data-delay="380" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 2" src="https://image2url.com/r2/default/images/1771688743164-4b6dc8d2-5262-4a62-a858-e7245e3a26cb.png"/>
 </a>
-<a class="tile reveal" data-delay="340" href="https://t.me/banizer" rel="noopener" target="_blank">
-<img alt="Image 1" src="/pic/3.png"/>
+<a class="tile reveal" data-delay="420" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 3" src="https://image2url.com/r2/default/images/1771688762533-258700dd-4e03-4e96-8702-a9e19b305de8.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 4" src="https://image2url.com/r2/default/images/1771688776848-c8b26983-5da2-44c0-9118-5a47219f41c5.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 5" src="https://image2url.com/r2/default/images/1771698494244-4d58a7ed-3bbc-4834-8a0d-2fb5c7898d38.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 6" src="https://image2url.com/r2/default/images/1771698509516-28ef72b7-994a-4007-9d28-cc8bc2687313.png"/>
+</a>
+<a class="tile reveal" data-delay="380" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 7" src="https://image2url.com/r2/default/images/1771688743164-4b6dc8d2-5262-4a62-a858-e7245e3a26cb.png"/>
+</a>
+<a class="tile reveal" data-delay="420" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 8" src="https://image2url.com/r2/default/images/1771698532428-83bed5a8-c883-4a33-8020-51e10c7c15c9.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 9" src="https://image2url.com/r2/default/images/1771698570743-60f05922-dbe2-4726-8ec0-dbe7566c3eb8.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 10" src="https://image2url.com/r2/default/images/1771698557365-3287afce-92ad-43de-91e9-56fb16753d85.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 11" src="https://image2url.com/r2/default/images/1771698594498-1d607b22-ca70-4b76-bf3a-5dc0e43fc46a.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 12" src="https://image2url.com/r2/default/images/1771698639427-88013b1a-8419-4121-94c9-277b21ff2e82.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 13" src="https://image2url.com/r2/default/images/1771698660912-4670b78a-d2bd-4465-ba52-7b1e8fced937.png"/>
+</a>
+<a class="tile reveal" data-delay="460" href="https://shiryuprm.com" rel="noopener" target="_blank">
+<img alt="Image 14" src="https://image2url.com/r2/default/images/1771698673517-a028edcf-e6c3-4701-99d8-8e92712acb2b.png"/>
 </a>
 </div>
 </section>
 </div>
 <footer class="footer reveal" data-delay="520">
-<p class="footerText">Thanks for your supporting our service </p>
+<p class="footerText">Made With Shiryu Premium</p>
+<div class="footerLinks">
+<a class="ripple" rel="noopener" target="_blank">Fast</a>
+<a class="ripple" rel="noopener" target="_blank">Safe </a>
+<a class="ripple" rel="noopener" target="_blank">Cheapest</a>
+</div>
 </footer>
 </div>
 <script>
-
-  const toggleBtn = document.getElementById('theme-toggle');
-  const htmlElement = document.documentElement;
-
-  // Check for saved preference
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  htmlElement.setAttribute('data-theme', savedTheme);
-
-  toggleBtn.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  });
-
-  // Reveal Animation Logic (In case you didn't have it)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in');
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
      const tabBtns = document.querySelectorAll(".tabBtn");
 
