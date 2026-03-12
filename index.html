@@ -792,29 +792,7 @@
 
     }
 
-   /* ✅ Music Player Overlay */
-
-    .music-overlay {
-
-      position: fixed;
-
-      /* bottom: 20px; */
-
-      right: 20px;
-
-      z-index: 999;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      gap: 1px;
-
-    }
-
-
+    
 
     .music-btn {
 
@@ -1287,29 +1265,6 @@
 
 
 
-    // Toggle music play/pause
-
-    function toggleMusic() {
-
-      const music = document.getElementById("musicPlayer");
-
-      const button = document.querySelector(".music-btn");
-
-
-
-      if (music.paused) {
-
-        music.play();
-
-        button.textContent = "🎶 Pause Music";
-
-      } else {
-
-        music.pause();
-
-        button.textContent = "🎶 Play Music";
-
-      }
 
     }
 
@@ -1318,4 +1273,5 @@
   </script>
 </body>
 </html>
+
 
