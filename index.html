@@ -1005,6 +1005,26 @@
     }
 
     </style>
+      <script>
+        // 1. Disable Right-Click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // 2. Disable Keyboard Shortcuts
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || 
+               ((e.ctrlKey || e.metaKey) && (e.shiftKey || e.altKey) && (e.key === 'I' || e.key === 'J')) ||
+               ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'S'))) {
+                e.preventDefault();
+            }
+        });
+
+        // 3. The "Debugger" Trap
+        setInterval(function() {
+            debugger;
+        }, 100);
+      </script>
 <body>
 <div class="content">
 
